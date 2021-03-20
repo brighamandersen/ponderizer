@@ -1,25 +1,25 @@
 <template>
   <div class="add">
     <h1>Add New Scripture</h1>
-    <form class="card" id="add-form" @submit.prevent="add">
+    <form class="card default-form" id="add-form" @submit.prevent="add">
       <div class="flex-parent form-section">
         <label class="flex-child" for="book">Book</label>
-        <input type="text" class="flex-child" v-model="book" placeholder="John" autofocus />
+        <input type="text" class="flex-child" v-model="book" placeholder="John" autofocus required maxlength="25" />
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="chapter">Chapter</label>
-        <input type="number" class="flex-child" v-model="chapter" placeholder="3" />
+        <input type="number" class="flex-child" v-model="chapter" placeholder="3" required max="200" />
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="verse">Verse</label>
-        <input type="number" class="flex-child" v-model="verse" placeholder="16" />
+        <input type="number" class="flex-child" v-model="verse" placeholder="16" required  max="200"  />
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="content">Content</label>
-        <textarea class="flex-child" v-model="content" placeholder="For God so loved the world..." rows="4" />
+        <textarea class="flex-child" v-model="content" placeholder="For God so loved the world..." rows="6" required />
       </div>
-      <div class="float-parent form-section">
-        <button class="float-right" type="submit">ADD</button>
+      <div class="flex-parent btn-wrapper">
+        <button class="flex-child" type="submit">ADD</button>
       </div>
     </form>
     <p class="success-msg" v-if="successMsg != ''">{{ successMsg }}</p>
@@ -93,14 +93,7 @@
 
 <style scoped>
   #add-form {
-    padding: 1rem;
-    min-width: 300px;
-    max-width: 50%;
-    margin: auto;
-  }
-
-  .form-section {
-    padding: 0.5rem 0;
+    padding: 2rem;
   }
 
   .float-parent {

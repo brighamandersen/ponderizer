@@ -24,7 +24,7 @@
   }
 
   #app-name {
-    margin: 0 2rem;
+    margin-left: 20px;
   }
 
   .nav-links {
@@ -35,8 +35,8 @@
 
   #nav a {
     font-weight: bold;
-    color: gray;
-    padding: 1rem 2rem;
+    color: rgb(187, 187, 187);
+    padding: 10px 20px;
   }
 
   #nav a.router-link-exact-active {

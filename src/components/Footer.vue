@@ -23,6 +23,6 @@
   }
   
   a {
-    color: gray;
+    color: rgb(187, 187, 187);
   }
 </style>

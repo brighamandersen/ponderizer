@@ -7,13 +7,12 @@
 <script>
   export default {
     name: 'PreviewCard',
-    props: ['scripture'],
+    props: ['scripture']
   };
 </script>
 
 <style scoped>
   #preview-card {
-    width: 200px;
     text-align: center;
   }
 </style>
