@@ -1,6 +1,5 @@
 <template>
-  <div class="card">
-    <span class="remove-icon">X</span>
+  <div class="card" id="preview-card">
     <h3>{{ scripture.book }} {{ scripture.chapter }}:{{ scripture.verse }}</h3>
   </div>
 </template>
@@ -13,31 +12,8 @@
 </script>
 
 <style scoped>
-  .card {
-    background: white;
+  #preview-card {
     width: 200px;
-    padding: 2rem;
-    margin: 2rem;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
     text-align: center;
-  }
-
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-
-  .remove-icon {
-    position: relative;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    padding: 0.5rem;
-  }
-
-  .remove-icon:hover {
-    background: red;
-    color: white;
-    border-radius: 50%;
   }
 </style>

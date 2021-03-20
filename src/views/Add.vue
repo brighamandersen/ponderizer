@@ -1,7 +1,7 @@
 <template>
   <div class="add">
     <h1>Add New Scripture</h1>
-    <form class="add-form" @submit.prevent="add">
+    <form class="card" id="add-form" @submit.prevent="add">
       <div class="flex-parent form-section">
         <label class="flex-child" for="book">Book</label>
         <input type="text" class="flex-child" v-model="book" placeholder="John" autofocus />
@@ -92,21 +92,7 @@
 </script>
 
 <style scoped>
-  .success-msg {
-    color: green;
-    text-align: center;
-    padding: 1rem;
-  }
-
-  .error-msg {
-    color: red;
-    text-align: center;
-    padding: 1rem;
-  }
-
-  .add-form {
-    background: white;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  #add-form {
     padding: 1rem;
     min-width: 300px;
     max-width: 50%;

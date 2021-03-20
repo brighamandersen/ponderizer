@@ -64,4 +64,28 @@
   .flex-child {
     flex: 1;
   }
+
+  .card {
+    background: white;
+    padding: 2rem;
+    margin: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  .success-msg {
+    color: green;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .error-msg {
+    color: red;
+    text-align: center;
+    padding: 1rem;
+  }
 </style>

@@ -1,8 +1,12 @@
 <template>
   <div class="home">
-    <div v-for="scripture in scriptures" :key="scripture.id">
+    <h1>All Ponderize Scriptures</h1>
+    <router-link v-for="scripture in scriptures" :key="scripture.id" :to="'/focus/' + scripture.id">
       <PreviewCard :scripture="scripture" />
-    </div>
+    </router-link>
+    <p v-if="scriptures.length === 0">You don't have any scriptures to ponderize.  
+      <router-link to="/add">Add</router-link> one now!
+    </p>
   </div>
 </template>
 
