@@ -35,7 +35,7 @@
 
   .content {
     min-height: calc(100vh - 180px);
-    background: yellow;
+    background: #e0d7bc;
     padding: 30px;
   }
 
@@ -43,6 +43,14 @@
     background: black;
     color: white;
     height: 60px;
+  }
+
+  input, textarea {
+    padding: 0.5rem;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: rgb(192, 192, 192);
   }
 
   textarea {

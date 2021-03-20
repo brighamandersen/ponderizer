@@ -4,21 +4,21 @@
     <form class="add-form" @submit.prevent="add">
       <div class="flex-parent form-section">
         <label class="flex-child" for="book">Book</label>
-        <input type="text" class="flex-child" v-model="book" placeholder="Ex: John" autofocus />
+        <input type="text" class="flex-child" v-model="book" placeholder="John" autofocus />
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="chapter">Chapter</label>
-        <input type="text" class="flex-child"  v-model="chapter" placeholder="Ex: 3" />
+        <input type="text" class="flex-child"  v-model="chapter" placeholder="3" />
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="verse">Verse</label>
-        <input type="text" class="flex-child" v-model="verse" placeholder="Ex: 16" />
+        <input type="text" class="flex-child" v-model="verse" placeholder="16" />
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="content">Content</label>
-        <textarea class="flex-child" v-model="content" placeholder="Ex: For God so loved the world..." rows="4" />
+        <textarea class="flex-child" v-model="content" placeholder="For God so loved the world..." rows="4" />
       </div>
-      <div class="float-parent">
+      <div class="float-parent form-section">
         <button class="float-right" type="submit">ADD</button>
       </div>
     </form>
@@ -45,6 +45,8 @@
     },
     methods: {
       add() {
+
+
         const newScripture = {
           id: this.book.toLowerCase() + '-' + this.chapter + '-' + this.verse,
           book: this.book,
