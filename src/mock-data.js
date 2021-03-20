@@ -1,13 +1,13 @@
 const mock = [
   {
-    id: 1,
+    id: 'philippians-4-13',
     book: 'Philippians',
     chapter: 4,
     verse: 13,
     content: 'I can do all things through Christ which strengtheneth me.',
   },
   {
-    id: 2,
+    id: 'john-15-13',
     book: 'John',
     chapter: 15,
     verse: 13,

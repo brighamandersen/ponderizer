@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <PreviewCard />
+    <div v-for="scripture in scriptures" :key="scripture.id">
+      <PreviewCard :scripture="scripture" />
+    </div>
   </div>
 </template>
 
@@ -13,5 +14,10 @@
     components: {
       PreviewCard
     },
+    computed: {
+      scriptures() {
+        return this.$root.$data.scriptures;
+      }
+    }
   };
 </script>
