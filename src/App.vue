@@ -34,8 +34,9 @@
   }
 
   .content {
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 180px);
     background: yellow;
+    padding: 30px;
   }
 
   .navbar-footer {
