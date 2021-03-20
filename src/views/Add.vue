@@ -8,11 +8,11 @@
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="chapter">Chapter</label>
-        <input type="text" class="flex-child"  v-model="chapter" placeholder="3" />
+        <input type="number" class="flex-child" v-model="chapter" placeholder="3" />
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="verse">Verse</label>
-        <input type="text" class="flex-child" v-model="verse" placeholder="16" />
+        <input type="number" class="flex-child" v-model="verse" placeholder="16" />
       </div>
       <div class="flex-parent form-section">
         <label class="flex-child" for="content">Content</label>
@@ -22,6 +22,7 @@
         <button class="float-right" type="submit">ADD</button>
       </div>
     </form>
+    <p class="success-msg" v-if="successMsg != ''">{{ successMsg }}</p>
     <p class="error-msg" v-if="errorMsg != ''">{{ errorMsg }}</p>
   </div>
 </template>
@@ -35,6 +36,7 @@
         chapter: '',
         verse: '',
         content: '',
+        successMsg: '',
         errorMsg: ''
       }
     },
@@ -45,7 +47,8 @@
     },
     methods: {
       add() {
-
+        this.successMsg = '';
+        this.errorMsg = '';
 
         const newScripture = {
           id: this.book.toLowerCase() + '-' + this.chapter + '-' + this.verse,
@@ -69,24 +72,32 @@
           this.chapter = '';
           this.verse = '';
           this.content = '';
+          this.successMsg = 'Scripture has been successfully added!';
         }
       }
     },
     watch: {
-      book() {
-        this.errorMsg = '';
+      errorMsg() {
+        if (this.errorMsg != '') {
+            setTimeout(() => this.errorMsg = '', 3000);
+        }
       },
-      chapter() {
-        this.errorMsg = '';
-      },
-      verse() {
-        this.errorMsg = '';
+      successMsg() {
+        if (this.successMsg != '') {
+            setTimeout(() => this.successMsg = '', 3000);
+        }
       }
     }
   };
 </script>
 
 <style scoped>
+  .success-msg {
+    color: green;
+    text-align: center;
+    padding: 1rem;
+  }
+
   .error-msg {
     color: red;
     text-align: center;
@@ -112,5 +123,15 @@
 
   .float-right {
     float: right;
+  }
+
+  label {
+    padding-top: 0.4rem;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 </style>
