@@ -44,4 +44,16 @@
     color: white;
     height: 60px;
   }
+
+  textarea {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+  }
+
+  .flex-parent {
+    display: flex;
+  }
+
+  .flex-child {
+    flex: 1;
+  }
 </style>

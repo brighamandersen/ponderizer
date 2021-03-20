@@ -2,18 +2,25 @@
   <div class="add">
     <h1>Add New Scripture</h1>
     <form class="add-form" @submit.prevent="add">
-    <label for="book">Book</label>
-    <input type="text" id="book" v-model="book" placeholder="Book" />
-    <br>
-    <label for="chapter">Chapter</label>
-    <input type="text" id="chapter" v-model="chapter" placeholder="Chapter" />
-    <br>
-    <label for="verse">Verse</label>
-    <input type="text"  id="verse" v-model="verse" placeholder="Verse" />
-    <br>
-    <label for="content">Content</label>
-    <textarea  id="content" v-model="content" placeholder="Content" />
-    <button type="submit">Add</button>
+      <div class="flex-parent form-section">
+        <label class="flex-child" for="book">Book</label>
+        <input type="text" class="flex-child" v-model="book" placeholder="Ex: John" autofocus />
+      </div>
+      <div class="flex-parent form-section">
+        <label class="flex-child" for="chapter">Chapter</label>
+        <input type="text" class="flex-child"  v-model="chapter" placeholder="Ex: 3" />
+      </div>
+      <div class="flex-parent form-section">
+        <label class="flex-child" for="verse">Verse</label>
+        <input type="text" class="flex-child" v-model="verse" placeholder="Ex: 16" />
+      </div>
+      <div class="flex-parent form-section">
+        <label class="flex-child" for="content">Content</label>
+        <textarea class="flex-child" v-model="content" placeholder="Ex: For God so loved the world..." rows="4" />
+      </div>
+      <div class="float-parent">
+        <button class="float-right" type="submit">ADD</button>
+      </div>
     </form>
     <p class="error-msg" v-if="errorMsg != ''">{{ errorMsg }}</p>
   </div>
@@ -80,5 +87,28 @@
 <style scoped>
   .error-msg {
     color: red;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .add-form {
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 1rem;
+    min-width: 300px;
+    max-width: 50%;
+    margin: auto;
+  }
+
+  .form-section {
+    padding: 0.5rem 0;
+  }
+
+  .float-parent {
+    overflow: hidden;
+  }
+
+  .float-right {
+    float: right;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="navbar-footer" id="footer">
-    <p class="footer-item">Ponderizer</p>
-    <a class="footer-item" 
+    <p class="flex-child">Ponderizer</p>
+    <a class="flex-child" 
       href="https://github.com/brighamband/ponderizer"
     >
     See Source Code
@@ -20,10 +20,6 @@
     display: flex;
     align-items: center;
     text-align: center;
-  }
-
-  .footer-item {
-    flex: 1;
   }
   
   a {

@@ -23,10 +23,6 @@
     align-items: center;
   }
 
-  .flex-child {
-    flex: 1;
-  }
-
   #app-name {
     margin: 0 2rem;
   }
