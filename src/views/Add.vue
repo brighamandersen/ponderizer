@@ -9,12 +9,12 @@
 </template>
 
 <script>
-export default {
-  name: 'Add',
-  computed: {
-    scriptures() {
-      return this.$root.$data.scriptures;
+  export default {
+    name: 'Add',
+    computed: {
+      scriptures() {
+        return this.$root.$data.scriptures;
+      }
     }
-  }
-};
+  };
 </script>
