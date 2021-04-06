@@ -1,7 +1,7 @@
 <template>
   <div class="add">
     <h1>Add New Scripture</h1>
-    <form class="card default-form" id="add-form" @submit.prevent="add">
+    <form class="card default-form" id="add-form" @submit.prevent="addScripture">
       <div class="flex-parent form-section">
         <label class="flex-child" for="book">Book</label>
         <input type="text" class="flex-child" v-model="book" placeholder="John" autofocus required maxlength="25" />
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     name: 'Add',
     data() {
@@ -40,18 +42,20 @@
         errorMsg: ''
       }
     },
-    computed: {
-      scriptures() {
-        return this.$root.$data.scriptures;
-      }
-    },
     methods: {
-      add() {
+      async getScriptures() {
+        try {
+          const response = await axios.get("/api/scriptures");
+          this.$root.$data.scriptures = response.data;
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      async addScripture() {
         this.successMsg = '';
         this.errorMsg = '';
 
         const newScripture = {
-          id: this.book.toLowerCase() + '-' + this.chapter + '-' + this.verse,
           book: this.book,
           chapter: this.chapter,
           verse: this.verse,
@@ -59,21 +63,34 @@
         }
 
         // Check for duplicate by id
-        const alreadyExists = this.$root.$data.scriptures.some((scripture) => scripture.id === newScripture.id);
-        
+        const alreadyExists = this.$root.$data.scriptures.some((scripture) => (
+          scripture.book == newScripture.book && scripture.chapter == newScripture.chapter && scripture.verse == newScripture.verse
+        ));
         
         if (alreadyExists) {
           this.errorMsg = "You already added that scripture.  Try a new verse.";
-        } else {
-          this.$root.$data.scriptures.push(newScripture);
-
-          this.errorMsg = '';
-          this.book = '';
-          this.chapter = '';
-          this.verse = '';
-          this.content = '';
-          this.successMsg = 'Scripture has been successfully added!';
+          return;
+        } 
+        
+        try {
+          await axios.post("/api/scriptures", {
+            book: this.book,
+            chapter: this.chapter,
+            verse: this.verse,
+            content: this.content
+          });
+          this.getScriptures();
+        } catch (error) {
+          console.log(error);
+          return;
         }
+
+        this.errorMsg = '';
+        this.book = '';
+        this.chapter = '';
+        this.verse = '';
+        this.content = '';
+        this.successMsg = 'Scripture has been successfully added!';
       }
     },
     watch: {

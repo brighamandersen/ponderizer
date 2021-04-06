@@ -3,15 +3,15 @@
     <h1>Focus Mode</h1>
     <div class="card" id="full-card">
       <div class="card-toolbar">
-        <span class="option edit-option" :class="{ active: inEditMode }" @click="inEditMode = true">EDIT</span>
-        <span class="option remove-option" @click="remove(scripture)">DELETE</span>
+        <span class="option edit-option" :class="{ active: inEditMode }" @click="inEditMode = !inEditMode">EDIT</span>
+        <span class="option remove-option" @click="removeScripture(scripture)">DELETE</span>
       </div>
       <div class="card-content" v-if="!inEditMode">
         <h2>{{ scripture.book }} {{ scripture.chapter }}:{{ scripture.verse }}</h2>
         <p>{{ scripture.content }}</p>
       </div>
       <div v-else>
-        <form class="default-form" @submit.prevent="inEditMode = false">
+        <form class="default-form" @submit.prevent="updateScripture(scripture)">
           <div class="flex-parent form-section">
             <label class="flex-child" for="book">Book</label>
             <input type="text" class="flex-child" v-model="scripture.book" autofocus required />
@@ -36,19 +36,20 @@
     </div>
     <p class="success-msg" v-if="successMsg != ''">{{ successMsg }}</p>
   </div>
-  <div v-else>
+  <!-- <div v-else>
     <NotFound />
-  </div>
+  </div> -->
 </template>
 
 <script>
-import NotFound from '../views/NotFound.vue';
+// import NotFound from '../views/NotFound.vue';
+import axios from 'axios';
 
 export default {
   name: 'Focus',
-  components: {
-    NotFound
-  },
+  // components: {
+  //   NotFound
+  // },
   data() {
     return {
       scripture: {},
@@ -57,17 +58,48 @@ export default {
     }
   },
   created() {
-    this.scripture = this.$root.$data.scriptures.find((scripture) => scripture.id
-    === this.$route.params.id);
+    this.getScriptureData();
   },
   methods: {
-    remove(scripture) {
-      this.$root.$data.scriptures.splice(this.$root.$data.scriptures.indexOf(scripture), 1);
+    async getScriptureData() {
+      try {
+        const response = await axios.get("/api/scriptures");
+        this.$root.$data.scriptures = response.data;
+        this.scripture = this.$root.$data.scriptures.find((scripture) => scripture._id
+    == this.$route.params.id);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async updateScripture(scripture) {
+      this.inEditMode = false;
+      try {
+        await axios.put(`/api/scriptures/${scripture._id}`, {
+          book: scripture.book,
+          chapter: scripture.chapter,
+          verse: scripture.verse,
+          content: scripture.content,
+        });
+
+        this.getScriptureData();
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    },
+    async removeScripture(scripture) {
+      try {
+        await axios.delete(`/api/scriptures/${scripture._id}`);
+        this.getScriptureData();
+      } catch (error) {
+        console.log(error);
+        return;
+      }
 
       this.successMsg = "Scripture successfully deleted.  Redirecting you back to Home...";
 
       setTimeout(() => this.$router.push("/"), 1000);
-    }
+    },
   }
 }
 </script>
