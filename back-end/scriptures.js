@@ -19,9 +19,14 @@ const scriptureSchema = new mongoose.Schema({
 
 const Scripture = mongoose.model('Scripture', scriptureSchema);
 
+// Get all photos for current user
 router.get('/', validUser, async (req, res) => {
   try {
-    let scriptures = await Scripture.find();
+    let scriptures = await Scripture.find({
+      user: req.user
+    }).sort({
+      created: -1   // Most recent first
+    }).populate('user');
     res.send(scriptures);
   } catch (error) {
     console.log(error);
@@ -34,7 +39,8 @@ router.post('/', validUser, async (req, res) => {
     book: req.body.book,
     chapter: req.body.chapter,
     verse: req.body.verse,
-    content: req.body.content
+    content: req.body.content,
+    user: req.user
   });
 
   try {
@@ -55,6 +61,7 @@ router.put('/:id', validUser, async (req, res) => {
     scripture.chapter = req.body.chapter;
     scripture.verse = req.body.verse;
     scripture.content = req.body.content;
+    scripture.user = req.user;
 
     scripture.save();
     res.send(scripture);

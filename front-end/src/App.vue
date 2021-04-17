@@ -72,6 +72,7 @@
 
   .flex-child {
     flex: 1;
+    align-items: center;
   }
 
   .card {

@@ -6,6 +6,7 @@ Vue.config.productionTip = false;
 
 let data = {
   scriptures: [],
+  user: null
 }
 
 new Vue({
