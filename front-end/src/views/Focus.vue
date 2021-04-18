@@ -3,8 +3,8 @@
     <h1>Focus Mode</h1>
     <div class="card" id="full-card">
       <div class="card-toolbar">
-        <span class="option edit-option" :class="{ active: inEditMode }" @click="inEditMode = !inEditMode">EDIT</span>
-        <span class="option remove-option" @click="removeScripture(scripture)">DELETE</span>
+        <span class="option edit-option" :class="{ active: inEditMode }" @click="inEditMode = !inEditMode"><i class="fas fa-edit"></i></span>
+        <span class="option remove-option" @click="removeScripture(scripture)"><i class="fas fa-trash-alt"></i></span>
       </div>
       <div class="card-content" v-if="!inEditMode">
         <h2>{{ scripture.book }} {{ scripture.chapter }}:{{ scripture.verse }}</h2>
@@ -36,20 +36,20 @@
     </div>
     <p class="success-msg" v-if="successMsg != ''">{{ successMsg }}</p>
   </div>
-  <!-- <div v-else>
+  <div v-else>
     <NotFound />
-  </div> -->
+  </div>
 </template>
 
 <script>
-// import NotFound from '../views/NotFound.vue';
+import NotFound from '../views/NotFound.vue';
 import axios from 'axios';
 
 export default {
   name: 'Focus',
-  // components: {
-  //   NotFound
-  // },
+  components: {
+    NotFound
+  },
   data() {
     return {
       scripture: {},

@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar />
     <div class="content">
-      <router-view/>
+      <router-view />
     </div>
     <Footer />
   </div>
@@ -12,12 +12,18 @@
   import Navbar from './components/Navbar.vue';
   import Footer from './components/Footer.vue';
 
+
   export default {
     name: 'App',
     components: {
       Navbar,
       Footer,
     },
+    computed: {
+      user() {
+        return this.$root.$data.user;
+      }
+    }
   };
 </script>
 

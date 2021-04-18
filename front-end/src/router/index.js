@@ -11,12 +11,12 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: Home
   },
   {
     path: '/add',
     name: 'Add',
-    component: Add,
+    component: Add
   },
   {
     path: '/focus/:id',

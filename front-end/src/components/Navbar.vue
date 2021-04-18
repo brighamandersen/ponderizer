@@ -3,7 +3,7 @@
     <div class="flex-child">
       <router-link to="/" id="app-name-home-link"><h1 id="app-name">Ponderizer</h1></router-link>
     </div>
-    <div class="flex-child nav-links">
+    <div class="flex-child nav-links" v-if="user">
       <router-link to="/"><i class="fas fa-home"></i></router-link>
       <router-link to="/add"><i class="fas fa-plus"></i></router-link>
         <h4><span id="logged-in-user">{{user.firstName}} {{user.lastName}}</span> <a @click="logout"><i class="fas fa-sign-out-alt"></i></a></h4>
@@ -26,6 +26,7 @@
         try {
           await axios.delete("/api/users");
           this.$root.$data.user = null;
+          this.$router.push('/');
         } catch (error) {
           this.$root.$data.user = null;
         }
