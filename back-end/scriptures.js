@@ -70,7 +70,7 @@ router.put('/:id', validUser, async (req, res) => {
     let scripture = await Scripture.findOne({
       _id: req.params.id
     })
-    scripture.title = req.body.book;
+    scripture.book = req.body.book;
     scripture.chapter = req.body.chapter;
     scripture.verse = req.body.verse;
     scripture.content = req.body.content;
