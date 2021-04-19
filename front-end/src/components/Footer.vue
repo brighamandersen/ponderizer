@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-footer" id="footer">
-    <p class="flex-child">Ponderizer <i>(8 Hours Spent)</i></p>
+    <p class="flex-child">Ponderizer <i>(10 Hours Spent)</i></p>
     <a class="flex-child" 
       href="https://github.com/brighamband/ponderizer"
     >
