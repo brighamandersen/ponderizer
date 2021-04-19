@@ -1,7 +1,7 @@
 <template>
   <div class="focus" v-if="scripture != null">
     <h1>Focus Mode</h1>
-    <div class="card" id="full-card">
+    <div class="card default-form" id="full-card">
       <div class="card-toolbar">
         <span class="option edit-option" :class="{ active: inEditMode }" @click="inEditMode = !inEditMode"><i class="fas fa-edit"></i></span>
         <span class="option remove-option" @click="removeScripture(scripture)"><i class="fas fa-trash-alt"></i></span>
@@ -11,7 +11,7 @@
         <p>{{ scripture.content }}</p>
       </div>
       <div v-else>
-        <form class="default-form" @submit.prevent="updateScripture(scripture)">
+        <form class="default-form inner-form" @submit.prevent="updateScripture(scripture)">
           <div class="flex-parent form-section">
             <label class="flex-child" for="book">Book</label>
             <input type="text" class="flex-child" v-model="scripture.book" autofocus required />
@@ -58,15 +58,13 @@ export default {
     }
   },
   created() {
-    this.getScriptureData();
+    this.getScripture();
   },
   methods: {
-    async getScriptureData() {
+    async getScripture() {
       try {
-        const response = await axios.get("/api/scriptures");
-        this.$root.$data.scriptures = response.data;
-        this.scripture = this.$root.$data.scriptures.find((scripture) => scripture._id
-    == this.$route.params.id);
+        const response = await axios.get(`/api/scriptures/${this.$route.params.id}`);
+        this.scripture = response.data;
       } catch (error) {
         console.log(error);
       }
@@ -80,8 +78,7 @@ export default {
           verse: scripture.verse,
           content: scripture.content,
         });
-
-        this.getScriptureData();
+        // this.getScripture();
       } catch (error) {
         console.log(error);
         return;
@@ -90,7 +87,6 @@ export default {
     async removeScripture(scripture) {
       try {
         await axios.delete(`/api/scriptures/${scripture._id}`);
-        this.getScriptureData();
       } catch (error) {
         console.log(error);
         return;
@@ -108,7 +104,6 @@ export default {
   #full-card {
     text-align: center;
     padding: 0;
-    margin: 0;
   }
 
   .card-toolbar {
@@ -132,10 +127,14 @@ export default {
   }
 
   .card-content {
-    padding: 2rem;
+    padding: 3rem 1rem;
   }
 
   .active {
     border-bottom: 1px solid black;
+  }
+
+  .inner-form {
+    max-width: 90%;
   }
 </style>

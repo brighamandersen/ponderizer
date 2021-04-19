@@ -11,13 +11,29 @@
 <script>
   import Navbar from './components/Navbar.vue';
   import Footer from './components/Footer.vue';
-
+  import axios from 'axios';
 
   export default {
     name: 'App',
     components: {
       Navbar,
       Footer,
+    },
+    async created() {
+      await this.getUsers();
+      if (this.$root.$data.user == null) {
+        this.$router.push("/");
+      }
+    },
+    methods: {
+      async getUsers() {
+        try { 
+          const response = await axios.get('/api/users');
+          this.$root.$data.user = response.data.user;
+        } catch (error) {
+          this.$root.$data.user = null;
+        }
+      },
     },
     computed: {
       user() {
@@ -81,6 +97,11 @@
     align-items: center;
   }
 
+  .form-section {
+    padding: 0.5rem 0;
+    flex-direction: column;
+  }
+
   .card {
     background: white;
     padding: 2rem;
@@ -104,10 +125,6 @@
     color: red;
     text-align: center;
     padding: 1rem;
-  }
-
-  .form-section {
-    padding: 0.5rem 0;
   }
 
   label {
@@ -145,9 +162,5 @@
     max-width: 40%;
     margin: auto;
     text-align: left;
-  }
-
-  .form-section {
-    flex-direction: column;
   }
 </style>

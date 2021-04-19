@@ -1,7 +1,6 @@
 <template>
-<div class="hero">
-  <div class="heroBox">
-    <form class="card default-form">
+<div class="login">
+    <form class="card default-form half-section" @submit.prevent="register">
       <fieldset>
         <legend>Register for an account</legend>
         <div class="flex-parent form-section">
@@ -18,15 +17,15 @@
         </div>
         <div class="flex-parent form-section">
           <label class="flex-child">Password</label>
-          <input type="text" class="flex-child" placeholder="Password" autofocus required v-model="password">
+          <input type="password" class="flex-child" placeholder="Password" autofocus required v-model="password">
         </div>
         <div class="flex-parent btn-wrapper">
-          <button class="flex-child" type="submit" @click.prevent="register">Register</button>
+          <button class="flex-child" type="submit">Register</button>
         </div>
       </fieldset>
+      <p v-if="error" class="error">{{error}}</p>
     </form>
-    <p v-if="error" class="error">{{error}}</p>
-    <form class="card default-form space-above">
+    <form class="card default-form half-section" @submit.prevent="login">
       <fieldset>
         <legend>Login</legend>
         <div class="flex-parent form-section">
@@ -35,15 +34,14 @@
         </div>
         <div class="flex-parent form-section">
           <label class="flex-child">Password</label>
-          <input type="text" class="flex-child" placeholder="Password" autofocus required v-model="passwordLogin">
+          <input type="password" class="flex-child" placeholder="Password" autofocus required v-model="passwordLogin">
         </div>
         <div class="flex-parent btn-wrapper">
-          <button class="flex-child" type="submit" @click.prevent="login">Login</button>
+          <button class="flex-child" type="submit">Login</button>
         </div>
       </fieldset>
+      <p v-if="errorLogin" class="error">{{errorLogin}}</p>
     </form>
-    <p v-if="errorLogin" class="error">{{errorLogin}}</p>
-  </div>
 </div>
 </template>
 
@@ -104,40 +102,29 @@ export default {
 </script>
 
 <style scoped>
-.space-above {
-  margin-top: 50px;
-}
-
-h1 {
-  font-size: 28px;
-  font-variant: capitalize;
-}
-
-.hero {
-  padding: 120px;
+.login {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
   justify-content: center;
 }
 
-.heroBox {
-  text-align: center;
+.half-section {
+  flex: 1;
 }
 
-.hero form {
-  font-size: 14px;
-}
-
-.hero form legend {
-  font-size: 20px;
+fieldset {
+  padding: 2rem;
 }
 
 .error {
-  margin-top: 10px;
-  display: inline;
+  margin-top: 20px;
   padding: 5px 20px;
   border-radius: 30px;
   font-size: 10px;
   background-color: #d9534f;
-  color: #fff;
+  color: white;
 }
 </style>

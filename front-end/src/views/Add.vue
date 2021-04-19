@@ -43,14 +43,6 @@
       }
     },
     methods: {
-      async getScriptures() {
-        try {
-          const response = await axios.get("/api/scriptures");
-          this.$root.$data.scriptures = response.data;
-        } catch (error) {
-          console.log(error);
-        }
-      },
       async addScripture() {
         this.successMsg = '';
         this.errorMsg = '';
@@ -61,7 +53,7 @@
           verse: this.verse,
           content: this.content
         }
-
+        
         // Check for duplicate by id
         const alreadyExists = this.$root.$data.scriptures.some((scripture) => (
           scripture.book == newScripture.book && scripture.chapter == newScripture.chapter && scripture.verse == newScripture.verse
@@ -79,7 +71,6 @@
             verse: this.verse,
             content: this.content
           });
-          this.getScriptures();
         } catch (error) {
           console.log(error);
           return;
