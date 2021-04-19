@@ -19,7 +19,7 @@ const scriptureSchema = new mongoose.Schema({
 
 const Scripture = mongoose.model('Scripture', scriptureSchema);
 
-// Get all photos for current user
+// Get all scriptures for current user
 router.get('/', validUser, async (req, res) => {
   try {
     let scriptures = await Scripture.find({
@@ -28,6 +28,19 @@ router.get('/', validUser, async (req, res) => {
       created: -1   // Most recent first
     }).populate('user');
     res.send(scriptures);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+// Get scripture by id for current user
+router.get('/:id', validUser, async (req, res) => {
+  try {
+    let scripture = await Scripture.findOne({
+      _id: req.params.id
+    }).populate('user');
+    res.send(scripture);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
