@@ -1,79 +1,120 @@
 <template>
-<div class="login">
-    <form class="card default-form half-section" @submit.prevent="register">
+  <div class="login">
+    <form class="card default-form half-section custom-form" @submit.prevent="register">
       <fieldset>
         <legend>Register for an account</legend>
         <div class="flex-parent form-section">
           <label class="flex-child">First Name</label>
-          <input type="text" class="flex-child" placeholder="First Name" autofocus required v-model="firstName">
+          <input
+            type="text"
+            class="flex-child"
+            placeholder="First Name"
+            autofocus
+            required
+            v-model="firstName"
+          />
         </div>
         <div class="flex-parent form-section">
           <label class="flex-child">Last Name</label>
-          <input type="text" class="flex-child" placeholder="Last Name" autofocus required v-model="lastName">
+          <input
+            type="text"
+            class="flex-child"
+            placeholder="Last Name"
+            autofocus
+            required
+            v-model="lastName"
+          />
         </div>
         <div class="flex-parent form-section">
           <label class="flex-child">Username</label>
-          <input type="text" class="flex-child" placeholder="Username" autofocus required v-model="username">
+          <input
+            type="text"
+            class="flex-child"
+            placeholder="Username"
+            autofocus
+            required
+            v-model="username"
+          />
         </div>
         <div class="flex-parent form-section">
           <label class="flex-child">Password</label>
-          <input type="password" class="flex-child" placeholder="Password" autofocus required v-model="password">
+          <input
+            type="password"
+            class="flex-child"
+            placeholder="Password"
+            autofocus
+            required
+            v-model="password"
+          />
         </div>
         <div class="flex-parent btn-wrapper">
           <button class="flex-child" type="submit">Register</button>
         </div>
       </fieldset>
-      <p v-if="error" class="error">{{error}}</p>
+      <p v-if="error" class="error">{{ error }}</p>
     </form>
-    <form class="card default-form half-section" @submit.prevent="login">
+    <form class="card default-form half-section custom-form" @submit.prevent="login">
       <fieldset>
         <legend>Login</legend>
         <div class="flex-parent form-section">
           <label class="flex-child">Username</label>
-          <input type="text" class="flex-child" placeholder="Username" autofocus required v-model="usernameLogin">
+          <input
+            type="text"
+            class="flex-child"
+            placeholder="Username"
+            autofocus
+            required
+            v-model="usernameLogin"
+          />
         </div>
         <div class="flex-parent form-section">
           <label class="flex-child">Password</label>
-          <input type="password" class="flex-child" placeholder="Password" autofocus required v-model="passwordLogin">
+          <input
+            type="password"
+            class="flex-child"
+            placeholder="Password"
+            autofocus
+            required
+            v-model="passwordLogin"
+          />
         </div>
         <div class="flex-parent btn-wrapper">
           <button class="flex-child" type="submit">Login</button>
         </div>
       </fieldset>
-      <p v-if="errorLogin" class="error">{{errorLogin}}</p>
+      <p v-if="errorLogin" class="error">{{ errorLogin }}</p>
     </form>
-</div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   data() {
     return {
-      firstName: '',
-      lastName: '',
-      username: '',
-      password: '',
-      usernameLogin: '',
-      passwordLogin: '',
-      error: '',
-      errorLogin: '',
-    }
+      firstName: "",
+      lastName: "",
+      username: "",
+      password: "",
+      usernameLogin: "",
+      passwordLogin: "",
+      error: "",
+      errorLogin: ""
+    };
   },
   methods: {
     async register() {
-      this.error = '';
-      this.errorLogin = '';
-      if (!this.firstName || !this.lastName || !this.username || !this.password)
-        return;
+      this.error = "";
+      this.errorLogin = "";
+      if (!this.firstName || !this.lastName || !this.username || !this.password) return;
       try {
-        let response = await axios.post('/api/users', {
+        let response = await axios.post("/api/users", {
           firstName: this.firstName,
           lastName: this.lastName,
           username: this.username,
-          password: this.password,
+          password: this.password
         });
         this.$root.$data.user = response.data.user;
       } catch (error) {
@@ -82,14 +123,13 @@ export default {
       }
     },
     async login() {
-      this.error = '';
-      this.errorLogin = '';
-      if (!this.usernameLogin || !this.passwordLogin)
-        return;
+      this.error = "";
+      this.errorLogin = "";
+      if (!this.usernameLogin || !this.passwordLogin) return;
       try {
-        let response = await axios.post('/api/users/login', {
+        let response = await axios.post("/api/users/login", {
           username: this.usernameLogin,
-          password: this.passwordLogin,
+          password: this.passwordLogin
         });
         this.$root.$data.user = response.data.user;
       } catch (error) {
@@ -98,7 +138,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -126,5 +166,9 @@ fieldset {
   font-size: 10px;
   background-color: #d9534f;
   color: white;
+}
+
+.custom-form {
+  margin: 2rem;
 }
 </style>
