@@ -9,7 +9,7 @@ const validUser = users.valid;
 const scriptureSchema = new mongoose.Schema({
   book: String,
   chapter: Number,
-  verse: Number,
+  verse: String,
   content: String,
   user: {
     type: mongoose.Schema.ObjectId,

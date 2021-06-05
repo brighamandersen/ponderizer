@@ -3,8 +3,15 @@
     <h1>Focus Mode</h1>
     <div class="card default-form" id="full-card">
       <div class="card-toolbar">
-        <span class="option edit-option" :class="{ active: inEditMode }" @click="inEditMode = !inEditMode"><i class="fas fa-edit"></i></span>
-        <span class="option remove-option" @click="removeScripture(scripture)"><i class="fas fa-trash-alt"></i></span>
+        <span
+          class="option edit-option"
+          :class="{ active: inEditMode }"
+          @click="inEditMode = !inEditMode"
+          ><i class="fas fa-edit" title="Edit"></i
+        ></span>
+        <span class="option remove-option" @click="removeScripture(scripture)"
+          ><i class="fas fa-trash-alt" title="Delete"></i
+        ></span>
       </div>
       <div class="card-content" v-if="!inEditMode">
         <h2>{{ scripture.book }} {{ scripture.chapter }}:{{ scripture.verse }}</h2>
@@ -22,7 +29,7 @@
           </div>
           <div class="flex-parent form-section">
             <label class="flex-child" for="verse">Verse</label>
-            <input type="number" class="flex-child" v-model="scripture.verse" required />
+            <input type="text" class="flex-child" v-model="scripture.verse" required />
           </div>
           <div class="flex-parent form-section">
             <label class="flex-child" for="content">Content</label>
@@ -42,20 +49,20 @@
 </template>
 
 <script>
-import NotFound from '../views/NotFound.vue';
-import axios from 'axios';
+import NotFound from "../views/NotFound.vue";
+import axios from "axios";
 
 export default {
-  name: 'Focus',
+  name: "Focus",
   components: {
     NotFound
   },
   data() {
     return {
       scripture: {},
-      successMsg: '',
+      successMsg: "",
       inEditMode: false
-    }
+    };
   },
   created() {
     this.getScripture();
@@ -76,7 +83,7 @@ export default {
           book: scripture.book,
           chapter: scripture.chapter,
           verse: scripture.verse,
-          content: scripture.content,
+          content: scripture.content
         });
         // this.getScripture();
       } catch (error) {
@@ -95,46 +102,46 @@ export default {
       this.successMsg = "Scripture successfully deleted.  Redirecting you back to Home...";
 
       setTimeout(() => this.$router.push("/"), 1000);
-    },
+    }
   }
-}
+};
 </script>
 
 <style scoped>
-  #full-card {
-    text-align: center;
-    padding: 0;
-  }
+#full-card {
+  text-align: center;
+  padding: 0;
+}
 
-  .card-toolbar {
-    background: rgb(233, 233, 233);
-    padding: 1rem;
-  }
+.card-toolbar {
+  background: rgb(233, 233, 233);
+  padding: 1rem;
+}
 
-  .option {
-    padding: 0.5rem;
-    margin: 0 0.5rem;
-    cursor: pointer;
-  }
+.option {
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
 
-  .edit-option:hover {
-    background: rgb(184, 184, 184);
-  }
+.edit-option:hover {
+  background: rgb(184, 184, 184);
+}
 
-  .remove-option:hover {
-    background: red;
-    color: white;
-  }
+.remove-option:hover {
+  background: red;
+  color: white;
+}
 
-  .card-content {
-    padding: 3rem 1rem;
-  }
+.card-content {
+  padding: 3rem 1rem;
+}
 
-  .active {
-    border-bottom: 1px solid black;
-  }
+.active {
+  border-bottom: 1px solid black;
+}
 
-  .inner-form {
-    max-width: 90%;
-  }
+.inner-form {
+  max-width: 90%;
+}
 </style>
