@@ -1,7 +1,7 @@
 <template>
   <div class="navbar-footer" id="footer">
     <p class="flex-child">Ponderizer</p>
-    <a class="flex-child" href="https://github.com/brighamandersen/ponderizer">
+    <a class="flex-child" href="https://github.com/brighambandersen/ponderizer">
       See Source Code
     </a>
   </div>
